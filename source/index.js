@@ -1,11 +1,13 @@
-// Core
-import React from 'react';
-import ReactDOM from 'react-dom';
+// // Core
+// import React from 'react';
+// import ReactDOM from 'react-dom';
 
-// Theme
-import './theme/init';
+// // Theme
+// import './theme/init.css';
 
-// App
-import App from './containers/App';
+// // App
+// import { App } from './pages/App';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+// ReactDOM.render(<App />, document.getElementById('app'));
+
+import './examples/4-children/3';

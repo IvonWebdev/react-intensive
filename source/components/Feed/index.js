@@ -1,16 +1,18 @@
 // Core
-import React, { Component } from 'react';
+import React from 'react';
 
-import Composer from 'components/Composer';
-import Post from 'components/Post';
+// Components
+import { StatusBar, Composer, Post } from '../../components';
 
-export default class Feed extends Component {
-    render() {
-        return (
-            <section>
-                <Composer />
-                <Post />
-            </section>
-        );
-    }
-}
+// Instruments
+import Styles from './styles.m.css';
+
+export const Feed = () => {
+    return (
+        <section className = { Styles.feed }>
+            <StatusBar />
+            <Composer />
+            <Post />
+        </section>
+    );
+};
