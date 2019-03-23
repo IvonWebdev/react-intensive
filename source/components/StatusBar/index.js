@@ -4,6 +4,15 @@ import React from 'react';
 // Instruments
 import Styles from './styles.m.css';
 
-export const StatusBar = () => {
-    return <section className = { Styles.statusBar } />;
+export const StatusBar = (props) => {
+    const { avatar, currentUserFirstName, currentUserLastName } = props;
+
+    return (
+        <section className = { Styles.statusBar }>
+            <button>
+                <img src = { avatar } />
+                <span>{currentUserFirstName}</span>&nbsp;<span>{currentUserLastName}</span>
+            </button>
+        </section>
+    );
 };

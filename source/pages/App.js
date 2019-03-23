@@ -3,18 +3,15 @@ import React from 'react';
 import { hot } from 'react-hot-loader';
 
 // Components
-import * as Components from '../components';
+import { Feed } from 'components/Feed';
+import avatar from '../theme/assets/lisa';
+
+const options = {
+    avatar,
+    currentUserFirstName: 'Lisa',
+    currentUserLastName:  'Simpson',
+};
 
 export const App = hot(module)(() => {
-    return (
-        <>
-            <Components.Feed />
-        </>
-    );
+    return <Feed { ...options } />;
 });
-
-// dev
-// export default hot(module)(App);
-
-// prod
-// export default App;
