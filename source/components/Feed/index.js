@@ -7,17 +7,12 @@ import { StatusBar, Composer, Post } from '../../components';
 // Instruments
 import Styles from './styles.m.css';
 
-export const Feed = (props) => {
-    const { avatar, currentUserFirstName } = props;
-
+export const Feed = () => {
     return (
         <section className = { Styles.feed }>
-            <StatusBar { ...props } />
-            <Composer
-                avatar = { avatar }
-                currentUserFirstName = { currentUserFirstName }
-            />
-            <Post { ...props } />
+            <StatusBar />
+            <Composer />
+            <Post />
         </section>
     );
 };

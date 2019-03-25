@@ -4,15 +4,20 @@ import React from 'react';
 // Instruments
 import Styles from './styles.m.css';
 
-export const StatusBar = (props) => {
-    const { avatar, currentUserFirstName, currentUserLastName } = props;
+import { Consumer } from 'components/HOC/withProfile';
 
+export const StatusBar = () => {
     return (
-        <section className = { Styles.statusBar }>
-            <button>
-                <img src = { avatar } />
-                <span>{currentUserFirstName}</span>&nbsp;<span>{currentUserLastName}</span>
-            </button>
-        </section>
+        <Consumer>
+            {(context) => (
+                <section className = { Styles.statusBar }>
+                    <button>
+                        <img src = { context.avatar } />
+                        <span>{context.currentUserFirstName}</span>&nbsp;
+                        <span>{context.currentUserLastName}</span>
+                    </button>
+                </section>
+            )}
+        </Consumer>
     );
 };
