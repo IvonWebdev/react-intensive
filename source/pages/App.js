@@ -3,7 +3,7 @@ import React from 'react';
 import { hot } from 'react-hot-loader';
 
 // Components
-import { Feed } from 'components/Feed';
+import { Feed } from 'components';
 import { Provider } from 'components/HOC/withProfile';
 
 import avatar from '../theme/assets/lisa';
