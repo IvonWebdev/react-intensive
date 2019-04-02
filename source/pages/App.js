@@ -17,7 +17,7 @@ const options = {
 export const App = hot(module)(() => {
     return (
         <Provider value = { options }>
-            <Feed />
+            <Feed { ...options } />
         </Provider>
     );
 });
