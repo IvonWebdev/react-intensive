@@ -3,21 +3,20 @@ import React, { Component } from 'react';
 import moment from 'moment';
 
 // Components
-import { StatusBar, Composer, Post } from '../../components';
+import { withProfile } from 'components/HOC/withProfile';
+import { Post } from '../../components';
+import StatusBar from 'components/StatusBar';
+import Composer from 'components/Composer';
 import Spinner from 'components/Spinner';
 
 // Instruments
 import Styles from './styles.m.css';
 import { getUniqueID, delay } from 'instruments';
 
+@withProfile
 class Feed extends Component {
     constructor() {
         super();
-
-        this._createPost = this._createPost.bind(this);
-        this._setPostsFetchingState = this._setPostsFetchingState.bind(this);
-        this._likePost = this._likePost.bind(this);
-        this._removePost = this._removePost.bind(this);
     }
 
     state = {
@@ -28,13 +27,13 @@ class Feed extends Component {
         isSpinning: false,
     };
 
-    _setPostsFetchingState(state) {
+    _setPostsFetchingState = (state) => {
         this.setState({
             isSpinning: state,
         });
-    }
+    };
 
-    async _createPost(comment) {
+    _createPost = async (comment) => {
         this._setPostsFetchingState(true);
         const post = {
             id:      getUniqueID(),
@@ -49,9 +48,9 @@ class Feed extends Component {
             posts:      [ post, ...posts ],
             isSpinning: false,
         }));
-    }
+    };
 
-    async _likePost(id) {
+    _likePost = async (id) => {
         const { currentUserFirstName, currentUserLastName } = this.props;
 
         this._setPostsFetchingState(true);
@@ -79,9 +78,9 @@ class Feed extends Component {
             posts:      newPosts,
             isSpinning: false,
         });
-    }
+    };
 
-    async _removePost(id) {
+    _removePost = async (id) => {
         this._setPostsFetchingState(true);
         await delay(800);
         const newPosts = this.state.posts.filter((post) => post.id !== id);
@@ -89,7 +88,7 @@ class Feed extends Component {
             posts:      newPosts,
             isSpinning: false,
         });
-    }
+    };
 
     render() {
         const { posts, isSpinning } = this.state;
