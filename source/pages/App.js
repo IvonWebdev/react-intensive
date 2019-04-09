@@ -3,6 +3,7 @@ import React from 'react';
 import { hot } from 'react-hot-loader';
 
 // Components
+import Catcher from 'components/Catcher';
 import { Feed } from 'components';
 import { Provider } from 'components/HOC/withProfile';
 
@@ -10,14 +11,16 @@ import avatar from '../theme/assets/lisa';
 
 const options = {
     avatar,
-    currentUserFirstName: 'Lisa',
-    currentUserLastName:  'Simpson',
+    currentUserFirstName: 'Владимир',
+    currentUserLastName:  'Ивченко',
 };
 
 export const App = hot(module)(() => {
     return (
-        <Provider value = { options }>
-            <Feed />
-        </Provider>
+        <Catcher>
+            <Provider value = { options }>
+                <Feed />
+            </Provider>
+        </Catcher>
     );
 });
