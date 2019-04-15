@@ -1,5 +1,7 @@
 // Core
 import React, { Component } from 'react';
+import { Transition } from 'react-transition-group';
+import { fromTo } from 'gsap';
 
 // Components
 import Catcher from 'components/Catcher';
@@ -8,11 +10,13 @@ import { Post } from '../../components';
 import StatusBar from 'components/StatusBar';
 import Composer from 'components/Composer';
 import Spinner from 'components/Spinner';
+import Postman from 'components/Postman';
 
 // Instruments
 import Styles from './styles.m.css';
 import { api, TOKEN, GROUP_ID } from 'config/api';
 import { socket } from 'socket/init';
+import { delay } from 'instruments';
 
 @withProfile
 class Feed extends Component {
@@ -149,6 +153,19 @@ class Feed extends Component {
         }));
     };
 
+    _animateComposerEnter = (composer) => {
+        fromTo(composer, 1, { opacity: 0, rotationX: 50 }, { opacity: 1, rotationX: 0 });
+    };
+
+    _animatePostmanEnter = (postman) => {
+        fromTo(postman, 1, { opacity: 0, x: 250 }, { opacity: 1, x: 0 });
+    };
+
+    _animatePostmanLeave = async (postman) => {
+        await delay(4000);
+        fromTo(postman, 1, { opacity: 1, x: 0 }, { opacity: 0, x: 250 });
+    };
+
     render() {
         const { posts, isSpinning } = this.state;
 
@@ -168,7 +185,22 @@ class Feed extends Component {
             <section className = { Styles.feed }>
                 <Spinner isSpinning = { isSpinning === true ? isSpinning : false } />
                 <StatusBar />
-                <Composer _createPost = { this._createPost } />
+                <Transition
+                    appear
+                    in
+                    timeout = { 1000 }
+                    onEnter = { this._animateComposerEnter }>
+                    <Composer _createPost = { this._createPost } />
+                </Transition>
+                <Transition
+                    appear
+                    in
+                    timeout = { 1000 }
+                    onEnter = { this._animatePostmanEnter }
+                    onEntered = { this._animatePostmanLeave }>
+                    <Postman />
+                </Transition>
+
                 {postJSQX}
             </section>
         );
