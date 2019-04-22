@@ -11,6 +11,7 @@ import StatusBar from 'components/StatusBar';
 import Composer from 'components/Composer';
 import Spinner from 'components/Spinner';
 import Postman from 'components/Postman';
+import Counter from 'components/Counter';
 
 // Instruments
 import Styles from './styles.m.css';
@@ -119,8 +120,6 @@ class Feed extends Component {
     };
 
     _likePost = async (id) => {
-        const { currentUserFirstName, currentUserLastName } = this.props;
-
         this._setPostsFetchingState(true);
 
         const response = await fetch(`${api}/${id}`, {
@@ -140,7 +139,7 @@ class Feed extends Component {
 
     _removePost = async (id) => {
         this._setPostsFetchingState(true);
-        const response = await fetch(`${api}/${id}`, {
+        await fetch(`${api}/${id}`, {
             method:  'DELETE',
             headers: {
                 Authorization: TOKEN,
@@ -210,6 +209,7 @@ class Feed extends Component {
                     onEntered = { this._animatePostmanLeave }>
                     <Postman />
                 </Transition>
+                <Counter count = { postJSQX.length } />
                 <TransitionGroup>{postJSQX}</TransitionGroup>
             </section>
         );
